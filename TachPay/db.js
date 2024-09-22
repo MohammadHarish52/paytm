@@ -1,7 +1,10 @@
 const mongoose = require("mongoose");
 
 mongoose.connect(
-  "mongodb+srv://harish52:pd6686224@cluster0.vaolm.mongodb.net/paytm"
+  "mongodb+srv://harish52:pd6686224@cluster0.vaolm.mongodb.net/paytm",
+  () => {
+    console.log("MongoDb connected");
+  }
 );
 
 const userSchema = new mongoose.Schema({
