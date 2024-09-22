@@ -1,11 +1,6 @@
 const mongoose = require("mongoose");
 
-mongoose.connect(
-  "mongodb+srv://harish52:pd6686224@cluster0.vaolm.mongodb.net/paytm",
-  () => {
-    console.log("MongoDb connected");
-  }
-);
+mongoose.connect(`${process.env.MONGO_URI}`);
 
 const userSchema = new mongoose.Schema({
   username: {
