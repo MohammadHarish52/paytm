@@ -7,7 +7,7 @@ const jwt = require("jsonwebtoken");
 // if the token checks out.
 // If not, return a 403 status back to the user
 
-export const authMiddleware = async (res, req, next) => {
+const authMiddleware = async (req, res, next) => {
   const authHeader = req.headers.authorization;
 
   if (!authHeader || !authHeader.startsWith("Bearer")) {

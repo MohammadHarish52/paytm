@@ -4,7 +4,7 @@ const dotenv = require("dotenv");
 const rootRouter = require("./routes/index.js");
 
 dotenv.config();
-const PORT = 3000;
+const PORT = 8000;
 const app = express();
 app.use(express.json());
 app.use(cors());
@@ -12,5 +12,5 @@ app.use(cors());
 app.use("/api/v1", rootRouter);
 
 app.listen(PORT, () => {
-  console.log("App is listening on Port 3000");
+  console.log("App is listening on Port 8000");
 });
