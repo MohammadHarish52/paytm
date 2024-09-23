@@ -44,7 +44,7 @@ const accountSchema = new mongoose.Schema({
     required: true,
   },
   balance: {
-    type: String,
+    type: Number, // Change from String to Number
     required: true,
   },
 });
