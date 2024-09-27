@@ -1,16 +1,14 @@
 import { Link } from "react-router-dom";
 
-const BottomWarning = ({ label, to, toText }) => {
+function BottomWarning({ label, buttonText, to }) {
   return (
-    <div>
-      <p className="mt-4 text-center text-sm">
-        {label}
-        <Link to={`/${to}`} className="text-black font-semibold">
-          {toText}
-        </Link>
-      </p>
+    <div className="py-2 text-sm flex justify-center">
+      <div>{label}</div>
+      <Link className="pointer underline pl-1 cursor-pointer" to={to}>
+        {buttonText}
+      </Link>
     </div>
   );
-};
+}
 
 export default BottomWarning;

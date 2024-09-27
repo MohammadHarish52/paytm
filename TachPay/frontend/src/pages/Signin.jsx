@@ -1,9 +1,9 @@
 import { useState } from "react";
-import Heading from "../Components/Heading";
 import { useNavigate } from "react-router-dom";
-import InputBox from "../Components/InputBox";
-import axios from "axios";
+
 import BottomWarning from "../Components/BottomWarning";
+import Heading from "../components/Heading";
+import InputBox from "../components/InputBox";
 
 const Signin = () => {
   const [username, setUsername] = useState("");
@@ -35,9 +35,9 @@ const Signin = () => {
           </button>
         </form>
         <BottomWarning
-          label="Don't have an Accout?"
-          to="signup"
-          toText="Sign up"
+          label={"Already have an account?"}
+          buttonText={"Sign up"}
+          to={"/signup"}
         />
       </div>
     </div>

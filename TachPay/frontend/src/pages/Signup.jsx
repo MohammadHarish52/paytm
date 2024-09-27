@@ -1,61 +1,78 @@
 import { useState } from "react";
+
+import Heading from "../components/Heading";
+import InputBox from "../components/InputBox";
+import SubHeading from "../components/SubHeading";
+import axios from "axios";
 import { useNavigate } from "react-router-dom";
-import Heading from "../Components/Heading";
-import InputBox from "../Components/InputBox";
+import Button from "../Components/Button";
 import BottomWarning from "../Components/BottomWarning";
 
 const Signup = () => {
+  const [firstName, setFirstName] = useState("");
+  const [lastName, setLastName] = useState("");
   const [username, setUsername] = useState("");
-  const [firstname, setFirstname] = useState("");
-  const [lastname, setLastname] = useState("");
   const [password, setPassword] = useState("");
-
   const navigate = useNavigate();
 
-  const handleSubmit = () => {
-    console.log("submit");
-  };
   return (
-    <div className="min-h-screen bg-gray-300 flex items-center justify-center">
-      <div className="bg-white p-8 rounded-lg shadow-md w-96">
-        <Heading label="Sign up" />
-        <form onSubmit={handleSubmit}>
+    <div className="bg-slate-300 h-screen flex justify-center">
+      <div className="flex flex-col justify-center">
+        <div className="rounded-lg bg-white w-80 text-center p-2 h-max px-4">
+          <Heading label={"Sign up"} />
+          <SubHeading label={"Enter your infromation to create an account"} />
           <InputBox
-            label="Username"
-            value={username}
-            setValue={setUsername}
-            placeholder="john@gmail.com"
-          />{" "}
-          <InputBox
-            label="Firstname"
-            value={firstname}
-            setValue={setFirstname}
-            placeholder="john"
-          />{" "}
-          <InputBox
-            label="Lastname"
-            value={lastname}
-            placeholder="Doe"
-            setValue={setLastname}
-          />{" "}
-          <InputBox
-            label="Password"
-            value={password}
-            setValue={setPassword}
-            placeholder="12345"
+            onChange={(e) => {
+              setFirstName(e.target.value);
+            }}
+            placeholder="John"
+            label={"First Name"}
           />
-          <button
-            className="w-full bg-black text-white p-2 rounded hover:bg-gray-800"
-            type="submit"
-          >
-            Sign Up
-          </button>
-        </form>
-        <BottomWarning
-          label="Already  have an Accout?"
-          to="signin"
-          toText="Sign in"
-        />
+          <InputBox
+            onChange={(e) => {
+              setLastName(e.target.value);
+            }}
+            placeholder="Doe"
+            label={"Last Name"}
+          />
+          <InputBox
+            onChange={(e) => {
+              setUsername(e.target.value);
+            }}
+            placeholder="harkirat@gmail.com"
+            label={"Email"}
+          />
+          <InputBox
+            onChange={(e) => {
+              setPassword(e.target.value);
+            }}
+            placeholder="123456"
+            label={"Password"}
+          />
+          <div className="pt-4">
+            <Button
+              onClick={async () => {
+                const response = await axios.post(
+                  "http://localhost:8000/api/v1/user/signup",
+                  {
+                    username,
+                    firstName,
+                    lastName,
+                    password,
+                  }
+                );
+                localStorage.setItem("token", response.data.token);
+                navigate("/dashboard");
+              }}
+              label={"Sign up"}
+            />
+          </div>
+          <BottomWarning
+            label={"Already have an account?"}
+            buttonText={"Sign in"}
+            to={"/signin"}
+          />
+        </div>
       </div>
     </div>
   );
