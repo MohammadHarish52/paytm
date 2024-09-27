@@ -1,13 +1,16 @@
-import { useState } from "react";
+import { useState, useEffect } from "react";
+import axios from "axios";
 
 const Users = () => {
-  const [users, setUsers] = useState([
-    {
-      firstName: "Mohammad",
-      lastName: "Harish",
-      _id: 1,
-    },
-  ]);
+  const [users, setUsers] = useState([]);
+
+  useEffect(() => {
+    axios.get("http://localhost:8000/api/v1/user/bulk").then((res) => {
+      console.log(res.data.user); // Log the response
+      setUsers(res.data.user); // Set the users state
+    });
+  }, []);
+
   return (
     <>
       <div className="font-bold mt-6 text-lg">Users</div>
@@ -20,7 +23,7 @@ const Users = () => {
       </div>
       <div>
         {users.map((user) => (
-          <User key={user} user={user} />
+          <User key={user._id} user={user} />
         ))}
       </div>
     </>
