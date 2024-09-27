@@ -1,4 +1,4 @@
-const InputBox = ({ label, value, setValue }) => {
+const InputBox = ({ label, value, setValue, placeholder }) => {
   return (
     <div>
       <label
@@ -13,6 +13,7 @@ const InputBox = ({ label, value, setValue }) => {
         value={value}
         onChange={(e) => setValue(e.target.value)}
         required
+        placeholder={placeholder}
       />{" "}
     </div>
   );
