@@ -4,6 +4,7 @@ import { useNavigate } from "react-router-dom";
 import BottomWarning from "../Components/BottomWarning";
 import Heading from "../components/Heading";
 import InputBox from "../components/InputBox";
+import axios from "axios";
 
 const Signin = () => {
   const [username, setUsername] = useState("");
@@ -12,7 +13,21 @@ const Signin = () => {
   const navigate = useNavigate();
 
   const handleSubmit = async (e) => {
-    ///
+    e.preventDefault();
+    const response = await axios.post(
+      "http://localhost:8000/api/v1/signin",
+      {
+        username,
+        password,
+      },
+      {
+        headers: {
+          "Content-Type": "application/json",
+        },
+      }
+    );
+    localStorage.setItem("token", response.data.token);
+    navigate("/dashboard");
   };
 
   return (
