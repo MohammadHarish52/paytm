@@ -39,9 +39,13 @@ const Signin = () => {
           <InputBox
             label="Username"
             value={username}
-            setValue={setUsername}
+            onChange={(e) => setUsername(e.target.value)}
           />{" "}
-          <InputBox label="Password" value={password} setValue={setPassword} />
+          <InputBox
+            label="Password"
+            value={password}
+            onChange={(e) => setPassword(e.target.value)}
+          />
           <button
             className="w-full bg-black text-white p-2 rounded hover:bg-gray-800"
             type="submit"
