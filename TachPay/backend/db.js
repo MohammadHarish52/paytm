@@ -1,7 +1,7 @@
 const mongoose = require("mongoose");
 
 mongoose.connect(
-  `mongodb+srv://harish52:pd6686224@cluster0.vaolm.mongodb.net/paytm`
+  `mongodb+srv://shivang14071993:4FfCt1jEXdf1M7OH@cluster0.rajcklb.mongodb.net/paytm`
 );
 
 mongoose.connection.on("connected", () => {

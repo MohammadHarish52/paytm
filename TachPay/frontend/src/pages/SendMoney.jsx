@@ -8,19 +8,49 @@ const SendMoney = () => {
   const id = searchParams.get("id");
   const name = searchParams.get("name");
 
+  const [loading, setLoading] = useState(false);
+  const [error, setError] = useState("");
+  const [success, setSuccess] = useState("");
+
   const handleTransfer = async () => {
-    await axios.post(
-      "http://localhost:8000/api/v1/account/transfer",
-      {
-        to: id,
-        amount,
-      },
-      {
-        headers: {
-          Authorization: `Bearer ${localStorage.getItem("token")}`,
+    setError("");
+    setSuccess("");
+
+    const numAmount = Number(amount);
+    if (!numAmount || numAmount <= 0) {
+      setError("Enter a valid amount greater than 0");
+      return;
+    }
+
+    setLoading(true);
+    try {
+      const resp = await axios.post(
+        "http://localhost:8000/api/v1/account/transfer",
+        {
+          to: id,
+          amount: numAmount,
         },
+        {
+          headers: {
+            Authorization: `Bearer ${localStorage.getItem("token")}`,
+          },
+        }
+      );
+
+      setSuccess(resp.data?.message || "Transfer successful");
+    } catch (err) {
+      console.error("Transfer failed", err);
+      // axios error handling
+      if (err?.response?.data?.message) {
+        setError(err.response.data.message);
+      } else if (err?.message) {
+        setError(err.message);
+      } else {
+        setError("Transfer failed. Check console for details.");
       }
-    );
+    } finally {
+      setLoading(false);
+    }
   };
   return (
     <div className="flex justify-center h-screen bg-gray-100">
